@@ -3,9 +3,12 @@ import { BiDetail } from "react-icons/bi";
 import { BsBarChartLine } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ toggleSidebar }) => {
   return (
     <div className="sidebar-container ">
+      <button className="btn btn-exit" onClick={() => toggleSidebar()}>
+        X
+      </button>
       <div className="icon-container">
         <NavLink
           to="/"
