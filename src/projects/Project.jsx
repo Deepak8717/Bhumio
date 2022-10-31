@@ -1,10 +1,12 @@
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { data } from "./data";
 
 const Project = () => {
   let { projectId } = useParams();
-  const index = data.findIndex((item) => item.projectId === Number(projectId));
-  const project = data[index];
+  const projectList = useSelector((state) => state.projects.projectList);
+  const index = projectList.findIndex((item) => item.projectId === projectId);
+  const project = projectList[index];
   return (
     <div className="wrapper">
       <h1>Project -{projectId}</h1>
@@ -24,7 +26,9 @@ const Project = () => {
           </div>
           <div>
             <span className="field">Start Date</span>:
-            <span className="field ">{project.startDate}</span>
+            <span className="field ">
+              {new Date(project.startDate).toLocaleDateString()}
+            </span>
           </div>
         </div>
         <div className="card-dashboard">
@@ -42,7 +46,9 @@ const Project = () => {
           </div>
           <div>
             <span className="field">End Date</span>:
-            <span className="field">{project.site.endDate}</span>
+            <span className="field">
+              {new Date(project.site.endDate).toLocaleDateString()}
+            </span>
           </div>
         </div>
         <div className="card-dashboard">

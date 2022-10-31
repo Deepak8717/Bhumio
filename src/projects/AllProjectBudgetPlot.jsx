@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -40,15 +41,15 @@ export const options = {
   },
 };
 
-const labels = [],
-  budget = [];
-data.map(
-  (project) => (
-    labels.push(project.projectId), budget.push(project.site.budget)
-  )
-);
-console.log(labels, budget);
 const AllProjectBudgetPlot = () => {
+  const projectList = useSelector((state) => state.projects.projectList);
+  const labels = [],
+    budget = [];
+  projectList.map(
+    (project) => (
+      labels.push(project.projectId), budget.push(project.site.budget)
+    )
+  );
   const data = {
     labels: labels,
     datasets: [

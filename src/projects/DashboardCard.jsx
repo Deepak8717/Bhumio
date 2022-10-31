@@ -17,7 +17,9 @@ const DashboardCard = ({ project }) => {
       </div>
       <div>
         <span className="field">End Date</span>:
-        <span className="field bold">{project.site.endDate}</span>
+        <span className="field bold">
+          {new Date(project.site.endDate).toLocaleDateString()}
+        </span>
       </div>
     </Link>
   );

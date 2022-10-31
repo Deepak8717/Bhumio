@@ -8,6 +8,7 @@ import {
   StyleSheet,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
+import { useSelector } from "react-redux";
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: "20px",
   },
 });
-const MyDocument = () => (
+const MyDocument = ({ projectList }) => (
   <Document>
     <Page
       size="A4"
@@ -33,7 +34,7 @@ const MyDocument = () => (
         <Text style={{ margin: "10px" }}>Budget Crore</Text>
       </View>
       <View style={{ width: "80%", margin: "10px auto" }}>
-        {data.map((project, index) => {
+        {projectList.map((project, index) => {
           return (
             <View
               style={{ flexDirection: "row", fontSize: "15px" }}
@@ -50,6 +51,7 @@ const MyDocument = () => (
   </Document>
 );
 const ProjectDetails = () => {
+  const projectList = useSelector((state) => state.projects.projectList);
   return (
     <>
       <div className="project-details-container">
@@ -59,7 +61,7 @@ const ProjectDetails = () => {
           <div className="project-heading">Project Name</div>
           <div className="project-heading">Budget ₹ Crore</div>
         </div>
-        {data.map((project, index) => {
+        {projectList.map((project, index) => {
           return (
             <div className="project-details" key={index}>
               <div>{project.projectId}</div>
@@ -70,7 +72,7 @@ const ProjectDetails = () => {
         })}
       </div>
       <PDFDownloadLink
-        document={<MyDocument />}
+        document={<MyDocument projectList={projectList} />}
         fileName="pdfreport.pdf"
         style={{
           border: "2px solid blueviolet",

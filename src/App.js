@@ -1,11 +1,11 @@
 import "./App.css";
-import { data } from "./data";
-import DashboardCard from "./DashboardCard";
-import Sidebar from "./Sidebar";
+import Sidebar from "./layouts/Sidebar";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useSelector } from "react-redux";
 function App() {
+  const projectList = useSelector((state) => state.projects.projectList);
   const [sidebarDisplay, setSidebarDisplay] = useState(true);
   const toggleSidebar = () => {
     setSidebarDisplay(!sidebarDisplay);
